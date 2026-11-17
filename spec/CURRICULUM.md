@@ -124,6 +124,28 @@ All loaded 2026-11-17. "Convert" shows the state of the copy in
 - AS 2201 amendments to .09 and a new .99 take effect 15 Dec 2026; they do not touch .42–.50.
 - T1078.004 Cloud Accounts exists (verified) and is held for Module 3.
 
+## Reading map (for stage 2, ingestion)
+
+Built at pre-flight from the converted files in `/literature/m01/`. Section
+names and numbers below were read from those files, not recalled. PCAOB
+paragraph numbers were read from the live pages on 2026-11-17.
+
+| Concept | File in `/literature/m01/` | Where to read |
+|---|---|---|
+| M1-C1 | `nist-sp-800-30-r1.md` | §2.3 Key Risk Concepts; then Appendix D (Threat Sources), E (Threat Events), F (Vulnerabilities and Predisposing Conditions), G (Likelihood of Occurrence), H (Impact), I (Risk Determination) |
+| M1-C2 | `nist-ir-8286-r1.md` | §2.1 Overview of ERM and §3.1.2 Risk Management Strategy (appetite, tolerance); §3.2 Identify the Risks (inherent and residual risk); §3.5 Plan and Execute Risk Response Strategies, especially §3.5.2 Responding to Residual Risk |
+| M1-C3 | `pcaob-as-2201-icfr-audit.md` *(pending manual save)* | Paragraphs .42 (design effectiveness) and .44–.45 (operating effectiveness) |
+| M1-C4 | `pcaob-as-2201-icfr-audit.md`, `pcaob-as-1105-audit-evidence.md` *(both pending)* | AS 2201 .50 (ordering of tests by persuasiveness); AS 1105 .15–.21 (the procedures) |
+| M1-C5 | `pcaob-as-1105-audit-evidence.md` *(pending)* | Paragraphs .06–.08 (relevance and reliability) and .10 (information produced by the company) |
+| M1-C6 | `iia-three-lines-model.md` | Principles 1–6, then Key Roles in the Three Lines Model. Optional depth: `iia-global-internal-audit-standards-2024.md` |
+| M1-C7 | `saltzer-schroeder-basic-principles.md` | The eight design principles, lettered a) to h), in Section I. Optional modern counterpart: `nist-sp-800-160-v1r1-design-principles.md`, Appendix E |
+| M1-C8 | `nist-sp-800-207.md` | §2.1 Tenets of Zero Trust; §2.2 A Zero Trust View of a Network |
+| M1-C9 | `nist-ir-8286-r1.md` | Table 1 (register template elements, in §3); §3.8 Creating and Maintaining an Enterprise-Level Cybersecurity Risk Register; Appendix D (excerpt from a notional register) |
+| M1-C10 | `nist-sp-800-53a-r5-methods.md` | §2.4 Assessment Procedures (2.4.1 objects, 2.4.2 methods, 2.4.3 objectives); Appendix C Assessment Method Descriptions |
+
+Ingestion budget is 20% of the time-box (about 3 hours). The files total far
+more than that; read only the places listed.
+
 ## Stage 1: dilemma and contrastive pair
 
 **Dilemma (unsolved, presented cold).** Larkspur Desk's quarterly user access

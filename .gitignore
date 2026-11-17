@@ -1,0 +1,86 @@
+# ---- Python / tooling -------------------------------------------------------
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+
+# ---- Local data: rebuilt deterministically by scripts/rehydrate.py ----------
+*.duckdb
+*.duckdb.wal
+*.sqlite
+*.sqlite3
+assurance-harness/data/
+labs/*/data/
+
+# ---- Vector stores ----------------------------------------------------------
+*.faiss
+*.index
+*.lance
+*.hnsw
+chroma/
+chroma_db/
+vectorstore/
+vector_store/
+lancedb/
+qdrant_storage/
+
+# ---- Model weights and training output --------------------------------------
+*.safetensors
+*.gguf
+*.ggml
+*.bin
+*.pt
+*.pth
+*.ckpt
+*.onnx
+*.h5
+*.npz
+models/
+checkpoints/
+adapters/
+lora_out/
+hf_cache/
+
+# ---- Literature: raw downloads stay local; converted Markdown is tracked ----
+literature/_raw/
+literature/_inbox/
+
+# ---- Secrets and cloud state (Module 3 onward) ------------------------------
+.env
+.env.*
+*.pem
+*.key
+*.p12
+*credentials*.json
+*service-account*.json
+*-sa-key*.json
+application_default_credentials.json
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfvars
+!*.tfvars.example
+
+# ---- Claude Code: machine-local only ----------------------------------------
+.claude/settings.local.json
+
+# ---- OS / editor noise ------------------------------------------------------
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+.idea/
+.vscode/
+
+# ---- Always tracked (guards against an over-broad rule above) ---------------
+!STATE.json
+!HEURISTICS.md
+!spec/**
+!literature/**/*.md
+!portfolio/**
+!flashcards/**
+!.claude/agents/**
+!.claude/skills/**
+!.claude/commands/**

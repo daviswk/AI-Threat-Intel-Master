@@ -1,0 +1,24 @@
+[project]
+name = "assurance-engine"
+version = "0.1.0"
+description = "Mastery-based learning and lab engine: 2nd-line privacy, security and AI technical assurance, fused with CTI."
+requires-python = ">=3.11,<3.13"
+dependencies = [
+    "pytest>=9.2",
+    "duckdb>=2.0",
+    "jsonschema>=4.26",
+    "pymupdf4llm>=2.1",
+    "beautifulsoup4>=4.12",
+    "markdownify>=0.13",
+]
+
+# Heavy, module-specific stacks are added just-in-time, with the learner's
+# approval, as optional groups (for example: `ai` at Module 6, `redteam` at
+# Module 7). Nothing large belongs in the base dependency list.
+
+[tool.uv]
+package = false
+
+[tool.pytest.ini_options]
+testpaths = ["assurance-harness"]
+addopts = "-q -p no:cacheprovider"

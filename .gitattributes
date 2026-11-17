@@ -1,0 +1,21 @@
+# One line-ending convention everywhere, so scripts written on Windows run on
+# macOS/Linux and checksums of text artifacts match across machines.
+* text=auto eol=lf
+*.sh text eol=lf
+*.py text eol=lf
+*.md text eol=lf
+*.json text eol=lf
+*.csv text eol=lf
+*.sql text eol=lf
+*.rego text eol=lf
+*.toml text eol=lf
+*.lock text eol=lf
+Makefile text eol=lf
+
+*.pdf binary
+*.gz binary
+*.png binary
+*.jpg binary
+
+# Dataset snapshots are stored byte-exact so their recorded checksums stay true.
+literature/**/snapshots/** -text

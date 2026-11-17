@@ -72,6 +72,11 @@ which lab control to drop. Never drop a gate stage.
 
 **Who:** main session, with the learner. No teaching yet.
 
+0. If the contrastive pair does not exist yet, build it first: invoke
+   `first-line-engineer` with the module's lab path and its 3.1 build brief
+   from `spec/CURRICULUM.md`. The pair is cut from the same system and data the
+   lab uses, so lab step 3.1 is effectively done here and is not repeated in
+   stage 3. This build needs no learner input.
 1. Present the module's unsolved 2nd-line dilemma.
 2. Present the contrastive pair: two near-identical artifacts, one effective.
    Do not say which, and do not name the flaw category.

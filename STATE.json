@@ -4,7 +4,7 @@
   "updated": "2026-11-17",
   "weekly_hours_budget": 8,
   "current_module": 1,
-  "current_stage": "preflight",
+  "current_stage": "incubation",
   "bootstrap": {
     "pass1_complete": true,
     "pass1_completed_on": "2026-11-17"
@@ -46,6 +46,10 @@
       "stage_history": [
         {
           "stage": "preflight",
+          "entered_on": "2026-11-17"
+        },
+        {
+          "stage": "incubation",
           "entered_on": "2026-11-17"
         }
       ],

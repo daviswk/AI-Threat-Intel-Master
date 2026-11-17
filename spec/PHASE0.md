@@ -183,7 +183,7 @@ does not stretch.
 
 | Module | Converted | Needs a manual browser save | Notes |
 |---|---|---|---|
-| 1 | see `literature/SOURCES.md` | PCAOB AS 1105, PCAOB AS 2201 | Module 1 pre-flight is complete once those two are saved and converted |
+| 1 | all 10, see `literature/SOURCES.md` | none outstanding (the two PCAOB standards were saved from a browser on 2026-11-17) | Pre-flight closed 2026-11-17 |
 | 2 | pre-cached for travel | see `literature/SOURCES.md` | Sources verified early; lab design and cert mapping remain just-in-time |
 | 3 | pre-cached for travel | CIS GCP Foundations Benchmark (registration form; optional) | Same |
 

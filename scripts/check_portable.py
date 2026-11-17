@@ -16,7 +16,7 @@ import sys
 
 ROOT = pathlib.Path(__file__).resolve().parents[1]
 
-TARGETS = ["CLAUDE.md", "HEURISTICS.md", "STATE.json", "Makefile", "pyproject.toml",
+TARGETS = ["CLAUDE.md", "HEURISTICS.md", "STATE.json", "Makefile", "pyproject.toml", "labs", "assurance-harness",
            "spec", ".claude", "scripts", "literature/convert.py"]
 TEXT_SUFFIXES = {".md", ".json", ".py", ".sh", ".toml", ".yml", ".yaml", ".txt", ""}
 

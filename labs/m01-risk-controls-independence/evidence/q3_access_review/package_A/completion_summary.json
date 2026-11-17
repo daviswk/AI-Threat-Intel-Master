@@ -1,0 +1,24 @@
+{
+  "campaign_id": "UAR-2026Q3",
+  "system": "Larkspur Desk identity and access layer",
+  "population_as_at": "2026-09-01 00:00:00",
+  "review_window": {
+    "opens": "2026-09-01 00:00:00",
+    "closes": "2026-09-21 23:59:59"
+  },
+  "accounts_in_scope": 9908,
+  "accounts_human": 4250,
+  "accounts_service": 5658,
+  "decisions_recorded": 9908,
+  "completion_rate": "100.0%",
+  "certified": 9596,
+  "revoked": 312,
+  "revocations_actioned": 312,
+  "revocations_actioned_within_7_days": 312,
+  "max_days_to_action": 6.5,
+  "reviewers": 522,
+  "reviewers_signed_off": 522,
+  "first_decision_at": "2026-09-01 08:18:41",
+  "last_decision_at": "2026-09-17 18:46:11",
+  "last_sign_off_at": "2026-09-17 20:38:47"
+}

@@ -1,0 +1,52 @@
+{
+  "datasets": {
+    "clean": {
+      "access_requests": "8aed31ba52c0a7e98a3d01b82a02460eb5b797eeb81b3f12389897a26acd36b8",
+      "access_reviews": "f913d352edf78820f370c767f2994188993b523f3632f404467fe213b13f84e9",
+      "auth_events": "66e4bb8922d978d180aa01a691fe0fd89653413442abb86aaaad25b6c13e0daa",
+      "entitlements": "d25f69d77d16dff84fefdcafe5a75d9ebfd0f86c21028818e58c7d6b167cb3b9",
+      "hr_identities": "0cd35db301a6fab3cec6f2521b2c301da2d4c578c32b1ccf26886c20efcbeb21",
+      "iam_accounts": "b2976f99387407258eae727817f84190e1268b0212682cab30818f9b97638696"
+    },
+    "planted": {
+      "access_requests": "e6228cb75d994f172351c55c4edef14c7be0374d41bb87ea541b188de0e1a204",
+      "access_reviews": "de3ed279b8bfbf5d9fa86f0766a269b74f9a5d44d84b392754126380c8b0bc59",
+      "auth_events": "82642b09bf549f54849105c200d5a8e21a568846013d743507bd5af582d8786b",
+      "entitlements": "3321046767a86d23338e739c161bccf65bb92b9e31e9de8ae48de4abfded6c8c",
+      "hr_identities": "c3e9a25a572f840218b19b3c4f3f22da5865f73a4233c53590109994bce566aa",
+      "iam_accounts": "2da48eb88d9abbe3ddc53b9a887f3c2825fae63efb68d4c998332e0e619c67bf"
+    },
+    "q3_review_snapshot_A": {
+      "access_requests": "8b2c1811a0c0c102a27d052d76785f9d636a6b2971a15136cbbceeb7f508879d",
+      "access_reviews": "6230f0dc0f116d367518c394c28ce20f8733a94acd3d71e0906118920b85a1b8",
+      "auth_events": "4bec3e1c2c3966fee6f83f2b7172799a72666527392ec6e9dc85a43dbab18a8e",
+      "entitlements": "9a288c6a718f128f4e300c05bda12d9e713e1df180e498a2a2d1424b982af79c",
+      "hr_identities": "443c8965e63ff7cd1ba4108b47ba5c59742037dade543d973b3e1733de259059",
+      "iam_accounts": "b39ccb0c66b7169a64e0c078b391ec25064f67b80a58c9e83c0309caf760d1cd"
+    },
+    "q3_review_snapshot_B": {
+      "access_requests": "60d414b8ecc627d6dc2f488f502c18d0ee70308718173e26d638d6557e75dc9f",
+      "access_reviews": "2c160ed941fa7948b3d3d9797d01c9d760e3628bb3d8837508b5945f689ac988",
+      "auth_events": "b52307b00c767e2198ffe7fd0d36bf9b6ac1cd4bb99996cbb40fb34e44a77ed9",
+      "entitlements": "8f541a37f55b7c7104f674bebf51743b99ab32db194189c73cf1193cb02ba6f9",
+      "hr_identities": "3e9ecd2648170d2978420fa87ad938bc1457a9a438c097797425e193b0741512",
+      "iam_accounts": "8b7d7d7db02a8c62ac8a1a913f7b5173361545147fc0f142248891d049dd44ea"
+    }
+  },
+  "evidence": {
+    "labs/m01-risk-controls-independence/evidence/q3_access_review/package_A/README.md": "8e90397636137f1cb6d89b37d98b94a62f418fc485b0b22ca0fcf59d5399abbe",
+    "labs/m01-risk-controls-independence/evidence/q3_access_review/package_A/completion_summary.json": "b2752b91e73de5f15c8ff1de82d78315bd17c5a533a51bd7b01bea2bc09bff35",
+    "labs/m01-risk-controls-independence/evidence/q3_access_review/package_A/control_owner_attestation.md": "dfa2e16fd39b35eb3861785e3d00a1252421d165080f8b880ad3fbc67ac9cf68",
+    "labs/m01-risk-controls-independence/evidence/q3_access_review/package_A/review_decisions.csv": "5fcf6e4b64a57ba3ce84563a867c0680ae8e0e6757969fbf4e7b9f695cb56472",
+    "labs/m01-risk-controls-independence/evidence/q3_access_review/package_A/reviewer_signoffs.csv": "06e9fa7dfb156abd9a61fd054f4b7df450e1d6c45b4ca9fee188a25d96664327",
+    "labs/m01-risk-controls-independence/evidence/q3_access_review/package_A/revocations.csv": "fdf3a1377e30c6c1aa9c665463a4cc65cdab9c44aee99a727a03b1bb7184db4f",
+    "labs/m01-risk-controls-independence/evidence/q3_access_review/package_B/README.md": "65e058adda9ebebd198f9e4f37a25753cdcfba3bf8873a18f631a46901335a63",
+    "labs/m01-risk-controls-independence/evidence/q3_access_review/package_B/completion_summary.json": "eabb40ac63c394efb8d8f41dede62a6f71b5317498a7b32ed4722e0cbbd664b3",
+    "labs/m01-risk-controls-independence/evidence/q3_access_review/package_B/control_owner_attestation.md": "b4544f25efa652f52f3960d569b0391a44abf811f79c0f708e08ba76e1c052f4",
+    "labs/m01-risk-controls-independence/evidence/q3_access_review/package_B/review_decisions.csv": "27ee6b006bb5248bb07f6beaa398d603814f4f42a24297171b64e0ba273a42de",
+    "labs/m01-risk-controls-independence/evidence/q3_access_review/package_B/reviewer_signoffs.csv": "e6eeeaf8bfa4b16e13170db3388f2327c89ddfbbd66e068a2d1612ee38785abe",
+    "labs/m01-risk-controls-independence/evidence/q3_access_review/package_B/revocations.csv": "294e203a06500c6e75d1f738124f0cf268b300fa058d51b761879b8d75b19a1d"
+  },
+  "generator": "m01_iam",
+  "note": "sha256 content hashes only: each table's rows in primary-key order; evidence files with LF line endings."
+}

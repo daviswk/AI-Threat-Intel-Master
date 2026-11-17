@@ -196,6 +196,14 @@ Controls the 1st line documents in `SYSTEM.md`, each with an owner:
 | LD-AC-04 | No identity holds a toxic pair (`refund.issue` + `refund.approve`; `iam.admin` + `auditlog.admin`) | AC-5 |
 | LD-AC-05 | Privileged roles are limited to named owners | AC-6 |
 
+**Built 2026-11-17** by `first-line-engineer` (seed fixed in the generator; about
+20 seconds to rebuild). Actual row counts are close to the targets above:
+3,000 identities, about 12,000 accounts, 44,000 entitlements, 42,700 requests,
+19,000 to 20,000 review decisions, and 115,000 to 120,000 auth events. The
+simulator is `labs/m01-risk-controls-independence/larkspur_cli.py`; the stage-1
+pair is in `evidence/q3_access_review/`, each package with its own neutral-named
+snapshot database under the lab's untracked `data/` folder.
+
 Planted in the `planted` dataset and sealed: an incomplete review population,
 drift in deprovisioning timeliness over the period, accounts missing from
 inventory, lapsed exceptions, and a survivorship gap in `auth_events`. The

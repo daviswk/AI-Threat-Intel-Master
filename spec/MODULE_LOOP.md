@@ -129,6 +129,15 @@ Rules for 3.3:
   via DuckDB, or Rego/OPA from Module 3) and runs against 10,000+ rows on both
   the `planted` and `clean` datasets. Results follow `spec/SCHEMAS.md` §2.
 - The main session never reads `.sealed/ANSWER_KEY.md` aloud or hints from it.
+- **Off-limits to the learner until the gate's artifact check:** the lab's
+  `.sealed/` folder, any `assurance-harness/generators/sealed_*.py` file, and
+  the generator source itself, and the checksum files. Also off-limits:
+  diffing the `planted` dataset against `clean` to locate planted rows. Each
+  procedure must find its exceptions from one dataset and the control's
+  definition alone; `clean` exists only to measure the procedure's specificity
+  afterwards. Nothing enforces any of this; it is an honor-system control. The
+  learner works from `SYSTEM.md`, the lab `README.md`, the evidence packages,
+  and the data.
 - Independence: the finding says what must be true. It does not design the fix.
 - Close the lab by returning to `cold_attempt.md`: the learner writes what they
   would now change (`incubation/retrospective.md`).

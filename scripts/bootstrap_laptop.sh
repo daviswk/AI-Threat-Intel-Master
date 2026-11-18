@@ -11,7 +11,8 @@
 #   4. Rebuilds local data (DuckDB tables, synthetic telemetry) from seeded
 #      generators. Nothing rebuilt here is tracked in Git.
 #   5. Runs the assurance harness.
-#   6. Re-runs the Phase 0 environment audit and the model-routing check on this
+#   6. Builds the Mission Control UI (web/) if Node 22.12+ is installed.
+#   7. Re-runs the Phase 0 environment audit and the model-routing check on this
 #      machine and writes a "Laptop Environment" section into spec/PHASE0.md
 #      (replaced on re-run, never duplicated).
 set -euo pipefail
@@ -28,7 +29,7 @@ while [ $# -gt 0 ]; do
   shift
 done
 
-step "1/6 Prerequisites"
+step "1/7 Prerequisites"
 command -v git >/dev/null 2>&1 || die "git not found"
 echo "git:    $(git --version)"
 if command -v uv >/dev/null 2>&1; then echo "uv:     $(uv --version)"; else warn "uv not found (pip fallback will be used)"; fi
@@ -44,21 +45,45 @@ fi
 [ -f .claude/skills/socratic-tutor/SKILL.md ] || die "vendored socratic-tutor skill is missing from .claude/skills/"
 [ ! -e .claude/agents/socratic-tutor.md ] || die "a socratic-tutor agent exists; the tutor must run inline"
 
-step "2/6 Python environment (locked)"
+step "2/7 Python environment (locked)"
 ensure_env
 py -c "import sys; print('python:', sys.version.split()[0])"
 
-step "3/6 State and portability"
+step "3/7 State and portability"
 py scripts/validate_state.py
 py scripts/check_portable.py
 
-step "4/6 Re-hydrate local data (seeded generators)"
+step "4/7 Re-hydrate local data (seeded generators)"
 py scripts/rehydrate.py
 
-step "5/6 Assurance harness"
+step "5/7 Assurance harness"
 run_harness
 
-step "6/6 Phase 0 audit on this machine"
+step "6/7 Mission Control UI (web/)"
+# The dashboard needs Node 22.12 or newer (same on Windows and macOS; web/.nvmrc
+# pins 24). `npm ci` needs the network this once; after the build the app runs
+# with no network. A missing or old Node is a warning, not a failure: the
+# curriculum itself does not depend on the UI.
+NODE_OK=0
+if command -v node >/dev/null 2>&1 && command -v npm >/dev/null 2>&1; then
+  echo "node:   $(node --version)"
+  if node -e 'const [a,b]=process.versions.node.split(".").map(Number); process.exit(a>22||(a===22&&b>=12)?0:1)'; then
+    NODE_OK=1
+  else
+    warn "Node 22.12 or newer is required for the UI. Install it, then run: uv run python scripts/start_ui.py"
+  fi
+else
+  warn "node/npm not found. Install Node 22.12 or newer (macOS: 'brew install node'), then run: uv run python scripts/start_ui.py"
+fi
+if [ "$NODE_OK" -eq 1 ]; then
+  if (cd web && npm ci --no-audit --no-fund && npm run build); then
+    echo "UI built into web/dist. Start it with: uv run python scripts/start_ui.py"
+  else
+    warn "UI build failed (offline?). Re-run this script, or 'uv run python scripts/start_ui.py', when connected."
+  fi
+fi
+
+step "7/7 Phase 0 audit on this machine"
 AUDIT_ARGS=(--label "$LABEL" --write)
 if [ "$SKIP_ROUTING" -eq 1 ]; then AUDIT_ARGS+=(--skip-routing); fi
 py scripts/phase0_audit.py "${AUDIT_ARGS[@]}"

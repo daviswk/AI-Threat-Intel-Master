@@ -1,0 +1,201 @@
+/* Three visual directions over one fixed layout. Each sets tokens, then its
+   own node and pane treatment. Nothing here moves a pane or changes a flow. */
+
+body { --ease: cubic-bezier(0.2, 0, 0, 1); }
+
+/* =====================================================================
+   A · SCHEMATIC  (conservative)
+   Engineering drawing. Cool slate, hairlines, square corners, one cyan
+   accent that always means "this is the live thing".
+   ===================================================================== */
+body[data-dir="a"] {
+  --font-ui: "IBM Plex Sans", sans-serif;
+  --font-display: "IBM Plex Sans", sans-serif;
+  --font-read: "IBM Plex Sans", sans-serif;
+  --font-mono: "IBM Plex Mono", monospace;
+  --bg: oklch(0.17 0.02 250);
+  --bar: oklch(0.17 0.02 250);
+  --surface: oklch(0.205 0.02 250);
+  --field: oklch(0.155 0.02 250);
+  --term: oklch(0.13 0.02 250);
+  --line: oklch(0.29 0.02 250);
+  --line-strong: oklch(0.42 0.02 250);
+  --text: oklch(0.93 0.01 250);
+  --muted: oklch(0.72 0.02 250);
+  --accent: oklch(0.82 0.11 205);
+  --accent-ink: oklch(0.17 0.02 250);
+  --focus: var(--accent);
+  --s-locked: oklch(0.56 0.02 250);
+  --s-active: var(--accent);
+  --s-complete: oklch(0.80 0.14 155);
+  --s-failing: oklch(0.70 0.18 25);
+  --tint-complete: oklch(0.80 0.14 155 / 0.10);
+  --tint-failing: oklch(0.70 0.18 25 / 0.14);
+  --differs: oklch(0.93 0.01 250 / 0.09);
+  --radius: 2px;
+  --trace-w: 1;
+  --trace-dash: 4 4;
+  --trace-reached: oklch(0.62 0.07 205);
+  --anchor: glyph;
+  background-image: radial-gradient(circle, oklch(0.29 0.02 250) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+[data-dir="a"] .view-tab[aria-current="page"] { color: var(--text); box-shadow: inset 0 -2px 0 var(--accent); }
+[data-dir="a"] .node-glyph { width: 56px; height: 56px; border: 1px solid var(--line-strong); font: 500 18px/1 var(--font-mono); }
+[data-dir="a"] .node[data-status="complete"] .node-glyph { border-color: var(--s-complete); color: var(--s-complete); }
+[data-dir="a"] .node[data-status="active"] .node-glyph { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); outline: 1px solid var(--accent); outline-offset: 5px; }
+[data-dir="a"] .node[data-status="locked"] .node-glyph { border-style: dashed; color: var(--muted); }
+[data-dir="a"] .node[aria-pressed="true"] .node-title { text-decoration: underline; text-decoration-color: var(--accent); text-underline-offset: 4px; }
+[data-dir="a"] .banner { background: oklch(0.82 0.11 205 / 0.07); }
+
+/* =====================================================================
+   B · LEDGER  (editorial)
+   An auditor's working papers. Warm ink, serif-led, ruled sheets instead
+   of boxes, modules as numbered seals. Ochre marks what needs a hand.
+   ===================================================================== */
+body[data-dir="b"] {
+  --font-ui: "Newsreader Variable", serif;
+  --font-display: "Newsreader Variable", serif;
+  --font-read: "Newsreader Variable", serif;
+  --font-mono: "JetBrains Mono Variable", monospace;
+  --bg: oklch(0.185 0.008 75);
+  --bar: oklch(0.185 0.008 75);
+  --surface: oklch(0.185 0.008 75);
+  --field: oklch(0.155 0.008 75);
+  --term: oklch(0.145 0.008 75);
+  --line: oklch(0.31 0.01 75);
+  --line-strong: oklch(0.46 0.012 75);
+  --text: oklch(0.92 0.025 85);
+  --muted: oklch(0.72 0.02 80);
+  --accent: oklch(0.80 0.12 80);
+  --accent-ink: oklch(0.2 0.02 75);
+  --focus: var(--accent);
+  --s-locked: oklch(0.54 0.012 75);
+  --s-active: var(--accent);
+  --s-complete: oklch(0.78 0.08 150);
+  --s-failing: oklch(0.68 0.15 30);
+  --tint-complete: oklch(0.78 0.08 150 / 0.10);
+  --tint-failing: oklch(0.68 0.15 30 / 0.15);
+  --differs: oklch(0.80 0.12 80 / 0.12);
+  --radius: 0px;
+  --trace-w: 1.5;
+  --trace-dash: 1 6;
+  --trace-reached: oklch(0.72 0.02 80);
+  --anchor: glyph;
+  font-size: 15px;
+}
+[data-dir="b"] .brand-name { font: italic 500 18px/1 var(--font-display); }
+[data-dir="b"] .topbar { border-bottom: 3px double var(--line-strong); }
+[data-dir="b"] .view-tab { font-style: italic; }
+[data-dir="b"] .view-tab[aria-current="page"] { color: var(--text); font-style: normal; text-decoration: underline; text-decoration-color: var(--accent); text-underline-offset: 6px; }
+[data-dir="b"] .panel { border: 0; border-top: 3px double var(--line-strong); }
+[data-dir="b"] .pane-title { font: italic 500 18px/1 var(--font-display); letter-spacing: 0; text-transform: none; color: var(--text); }
+[data-dir="b"] .pair-col h4 { font: italic 500 15px/1 var(--font-display); letter-spacing: 0; text-transform: none; color: var(--text); }
+[data-dir="b"] .eyebrow { color: var(--accent); }
+[data-dir="b"] .btn { font: 11px/1 var(--font-mono); letter-spacing: 0.06em; text-transform: uppercase; }
+[data-dir="b"] .tab { font-style: italic; border-bottom-width: 1px; }
+[data-dir="b"] .tab[aria-selected="true"] { font-style: normal; }
+[data-dir="b"] .stat b { font-weight: 400; font-size: 32px; }
+[data-dir="b"] .md-title { font: italic 400 32px/1.1 var(--font-display); }
+[data-dir="b"] .reader { font-size: 15px; line-height: 1.65; }
+[data-dir="b"] .reader h1 { font-weight: 400; font-style: italic; font-size: 32px; }
+[data-dir="b"] .reader h2, [data-dir="b"] .reader h3 { font-weight: 500; }
+[data-dir="b"] .node { flex-direction: column; text-align: center; gap: 8px; width: 200px; align-self: start; margin-top: 32px; }
+[data-dir="b"] .node-body { justify-items: center; }
+[data-dir="b"] .node-title { font-weight: 400; font-size: 15px; line-height: 1.25; }
+[data-dir="b"] .node-glyph { width: 64px; height: 64px; border-radius: 50%; border: 1.5px solid var(--line-strong); }
+[data-dir="b"] .node-num { font-size: 0; }
+[data-dir="b"] .node-num::after { content: attr(data-roman); font: 400 24px/1 var(--font-display); }
+[data-dir="b"] .node[data-status="complete"] .node-glyph { border-color: var(--s-complete); color: var(--s-complete); box-shadow: inset 0 0 0 4px var(--bg), inset 0 0 0 5px var(--s-complete); }
+[data-dir="b"] .node[data-status="active"] .node-glyph { background: var(--accent); border-color: var(--accent); color: var(--accent-ink); box-shadow: 0 0 0 5px var(--bg), 0 0 0 6px var(--accent); }
+[data-dir="b"] .node[data-status="locked"] .node-glyph { border-style: dotted; color: var(--s-locked); }
+[data-dir="b"] .node[aria-pressed="true"] .node-title { font-style: italic; text-decoration: underline; text-decoration-color: var(--accent); text-underline-offset: 4px; }
+[data-dir="b"] .path-lines line { stroke-linecap: round; }
+[data-dir="b"] .burn { height: 6px; border: 0; background: repeating-linear-gradient(90deg, var(--line-strong) 0 1px, transparent 1px 5%); border-bottom: 1px solid var(--line-strong); }
+[data-dir="b"] .banner-where { background: transparent; color: var(--accent); border: 1px solid var(--accent); }
+[data-dir="b"] .banner-text { font: italic 400 18px/1.3 var(--font-display); }
+[data-dir="b"] .card p { font-size: 24px; }
+
+/* =====================================================================
+   C · CONSOLE  (novel)
+   An operator's board. The chrome is achromatic; colour appears only as
+   status. The live thing is a solid filled block, not an outline.
+   ===================================================================== */
+body[data-dir="c"] {
+  --font-ui: "Geist Mono Variable", monospace;
+  --font-display: "Bricolage Grotesque Variable", sans-serif;
+  --font-read: "Bricolage Grotesque Variable", sans-serif;
+  --font-mono: "Geist Mono Variable", monospace;
+  --bg: oklch(0.12 0 0);
+  --bar: oklch(0.12 0 0);
+  --surface: oklch(0.175 0 0);
+  --surface-2: oklch(0.225 0 0);
+  --field: oklch(0.14 0 0);
+  --term: oklch(0.09 0 0);
+  --line: oklch(0.26 0 0);
+  --line-strong: oklch(0.40 0 0);
+  --text: oklch(0.96 0 0);
+  --muted: oklch(0.70 0 0);
+  --accent: oklch(0.96 0 0);
+  --accent-ink: oklch(0.12 0 0);
+  --focus: oklch(0.88 0.17 98);
+  --s-locked: oklch(0.48 0 0);
+  --s-active: oklch(0.88 0.17 98);
+  --s-complete: oklch(0.83 0.14 165);
+  --s-failing: oklch(0.70 0.20 22);
+  --tint-complete: oklch(0.83 0.14 165 / 0.12);
+  --tint-failing: oklch(0.70 0.20 22 / 0.18);
+  --differs: oklch(0.96 0 0 / 0.10);
+  --radius: 6px;
+  --trace-w: 4;
+  --trace-dash: none;
+  --trace-reached: var(--s-complete);
+  --anchor: node;
+  font-size: 12px;
+}
+[data-dir="c"] .topbar { border-bottom: 0; }
+[data-dir="c"] .brand-name { font: 700 18px/1 var(--font-display); letter-spacing: -0.01em; }
+[data-dir="c"] .view-tab { height: 28px; align-self: center; border-radius: var(--radius); text-transform: lowercase; }
+[data-dir="c"] .view-tab[aria-current="page"] { background: var(--text); color: var(--bg); }
+[data-dir="c"] .panel { border: 0; border-radius: 8px; }
+[data-dir="c"] .pane-head { background: var(--surface-2); border-bottom: 0; }
+[data-dir="c"] .pane-title, [data-dir="c"] .pair-col h4 { font: 600 12px/1 var(--font-mono); letter-spacing: 0; text-transform: lowercase; color: var(--text); }
+[data-dir="c"] .btn { background: var(--surface-2); border-color: transparent; text-transform: lowercase; }
+[data-dir="c"] .btn:hover { border-color: var(--text); }
+[data-dir="c"] .btn-primary { background: var(--accent); color: var(--accent-ink); }
+[data-dir="c"] .tab { border-bottom: 0; border-radius: 4px; text-transform: lowercase; }
+[data-dir="c"] .tab[aria-selected="true"] { background: var(--text); color: var(--bg); }
+[data-dir="c"] .tab[aria-selected="true"] .now { color: var(--bg); }
+[data-dir="c"] .pane-left > .tabs { padding-bottom: 8px; }
+[data-dir="c"] .stat b { font-weight: 700; font-size: 32px; letter-spacing: -0.02em; }
+[data-dir="c"] .md-title { font: 700 32px/1.05 var(--font-display); letter-spacing: -0.02em; }
+[data-dir="c"] .reader h1 { font-weight: 700; font-size: 32px; letter-spacing: -0.02em; }
+[data-dir="c"] .path-lines line { stroke: var(--surface-2); }
+[data-dir="c"] .path-lines line.reached { stroke: var(--s-complete); }
+[data-dir="c"] .node { width: 232px; min-height: 96px; padding: 12px 16px; gap: 12px; background: var(--surface); border: 1px solid transparent; border-radius: 8px; }
+[data-dir="c"] .node-glyph { background: none; font: 700 32px/1 var(--font-display); letter-spacing: -0.02em; width: 36px; }
+[data-dir="c"] .node-meta { white-space: nowrap; }
+[data-dir="c"] .node-body { flex: 1; }
+[data-dir="c"] .node-title { font: 600 13px/1.25 var(--font-display); }
+[data-dir="c"] .node-stages { margin-top: 4px; }
+[data-dir="c"] .node-stages i { flex: 1; height: 4px; border-radius: 2px; }
+[data-dir="c"] .node[data-status="complete"] .node-glyph { color: var(--s-complete); }
+[data-dir="c"] .node[data-status="active"] { background: var(--s-active); color: var(--accent-ink); }
+[data-dir="c"] .node[data-status="active"] .node-meta { color: var(--accent-ink); }
+[data-dir="c"] .node[data-status="active"] .fail-note { color: var(--accent-ink); font-weight: 700; }
+[data-dir="c"] .node[data-status="active"] .node-stages i { background: oklch(0.12 0 0 / 0.25); }
+[data-dir="c"] .node[data-status="active"] .node-stages i.done { background: var(--accent-ink); }
+[data-dir="c"] .node[data-status="active"] .node-stages i.current { background: var(--accent-ink); opacity: 0.6; }
+[data-dir="c"] .node[data-status="locked"] { background: var(--bg); border: 1px dashed var(--line-strong); }
+[data-dir="c"] .node[data-status="locked"] .node-glyph { color: var(--s-locked); }
+[data-dir="c"] .node[aria-pressed="true"] { border: 1px solid var(--text); box-shadow: 0 0 0 2px var(--bg), 0 0 0 3px var(--text); }
+[data-dir="c"] .banner { background: var(--s-active); color: var(--accent-ink); border-bottom: 0; }
+[data-dir="c"] .banner-where { background: var(--accent-ink); color: var(--s-active); }
+[data-dir="c"] .banner-text { font: 600 18px/1.25 var(--font-display); }
+[data-dir="c"] .banner .btn { background: oklch(0.12 0 0 / 0.14); color: var(--accent-ink); }
+[data-dir="c"] .banner .btn:hover { border-color: var(--accent-ink); }
+[data-dir="c"] .banner .btn-primary { background: var(--accent-ink); color: var(--s-active); }
+[data-dir="c"] .banner :focus-visible { outline-color: var(--accent-ink); }
+[data-dir="c"] .burn { height: 12px; border: 0; border-radius: 3px; background: var(--surface-2); overflow: visible; }
+[data-dir="c"] .burn-fill { border-radius: 3px; }
+[data-dir="c"] .card p { font-weight: 600; font-size: 24px; letter-spacing: -0.01em; }

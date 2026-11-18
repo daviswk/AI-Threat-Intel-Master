@@ -1,6 +1,6 @@
 # Convenience targets for machines that have `make`. Each one calls the same
 # script the /sync-down and /sync-up slash commands use.
-.PHONY: bootstrap sync-down sync-up validate test routing
+.PHONY: bootstrap sync-down sync-up validate test routing studio
 
 bootstrap:
 	bash scripts/bootstrap_laptop.sh
@@ -20,3 +20,8 @@ test:
 
 routing:
 	uv run --frozen python scripts/verify_routing.py
+
+# Mission Control: the local dashboard over this repo (web/). Builds the
+# frontend if needed (Node 22.12+), serves on 127.0.0.1, opens the browser.
+studio:
+	uv run --frozen python scripts/start_ui.py

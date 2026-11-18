@@ -66,6 +66,10 @@ application_default_credentials.json
 # ---- Claude Code: machine-local only ----------------------------------------
 .claude/settings.local.json
 
+# ---- Mission Control UI (/web) ----------------------------------------------
+web/node_modules/
+web/dist/
+
 # ---- OS / editor noise ------------------------------------------------------
 .DS_Store
 Thumbs.db

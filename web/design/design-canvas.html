@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mission Control · Phase A design canvas</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/ibm-plex-sans@5.3.0/400.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/ibm-plex-sans@5.3.0/600.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/ibm-plex-mono@5.3.0/400.css">
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  body { margin: 0; background: #e3e1dc; color: #1d1c1a; font: 14px/1.5 "IBM Plex Sans", sans-serif; }
+  .wrap { max-width: 2200px; margin: 0 auto; padding: 32px; }
+  h1 { margin: 0 0 4px; font-size: 24px; line-height: 1.2; }
+  .lede { margin: 0 0 24px; color: #55524c; max-width: 90ch; }
+  .system { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 24px; padding: 16px 0; margin-bottom: 24px; border-top: 1px solid #b9b6ae; border-bottom: 1px solid #b9b6ae; }
+  .system h2, .dir h2, .rowlabel { margin: 0 0 4px; font: 600 11px/1.4 "IBM Plex Sans", sans-serif; letter-spacing: 0.08em; text-transform: uppercase; color: #55524c; }
+  .system p { margin: 0; font: 12px/1.5 "IBM Plex Mono", monospace; }
+  .canvas { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+  .dir h3 { margin: 0; font-size: 18px; }
+  .dir .pitch { margin: 4px 0 12px; color: #55524c; min-height: 4.5em; }
+  .tokens { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 8px; }
+  .sw { display: grid; gap: 4px; font: 11px/1.3 "IBM Plex Mono", monospace; color: #55524c; }
+  .sw i { height: 28px; border: 1px solid rgb(0 0 0 / 0.2); }
+  .type { margin: 0 0 16px; font: 12px/1.5 "IBM Plex Mono", monospace; color: #1d1c1a; }
+  .rowlabel { margin: 16px 0 8px; display: flex; justify-content: space-between; }
+  .rowlabel a { color: #1d1c1a; }
+  .frame { position: relative; aspect-ratio: 1440 / 900; overflow: hidden; background: #111; border: 1px solid #1d1c1a; }
+  .frame iframe { position: absolute; top: 0; left: 0; width: 1440px; height: 900px; border: 0; transform-origin: 0 0; pointer-events: none; }
+  .frame a { position: absolute; inset: 0; }
+  .frame a:focus-visible { outline: 3px solid #1d1c1a; outline-offset: 2px; }
+  .notes { margin-top: 32px; padding-top: 16px; border-top: 1px solid #b9b6ae; max-width: 100ch; color: #55524c; }
+  .notes li { margin-bottom: 4px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Mission Control · three directions</h1>
+  <p class="lede">The layout in section 1.2 is fixed across all three. What changes is type, colour logic, and how nodes and panes are drawn. Every frame runs the same prototype on the same mock data. Click a frame to open it full size and click through.</p>
+
+  <section class="system" aria-label="Shared system">
+    <div><h2>Type scale</h2><p>11 / 12 / 13 / 15 / 18 / 24 / 32 px</p></div>
+    <div><h2>Spacing</h2><p>4 / 8 / 12 / 16 / 24 / 32 / 48 px</p></div>
+    <div><h2>Layout</h2><p>48 top bar. Map: path + 384 panel. Room: 42 / 58, right split 56 / 44.</p></div>
+    <div><h2>Status</h2><p>locked, active, complete, failing. Colour + shape + word, always.</p></div>
+    <div><h2>Motion</h2><p>150ms state, 240ms pane, one easing. Off under reduced motion.</p></div>
+  </section>
+
+  <main class="canvas">
+    <section class="dir">
+      <h2>A · conservative</h2>
+      <h3>Schematic</h3>
+      <p class="pitch">An engineering drawing. Hairlines, square corners, a dot grid. One cyan accent that only ever means "this is the live thing". Modules are square components on a trace.</p>
+      <div class="tokens">
+        <span class="sw"><i style="background:oklch(0.17 0.02 250)"></i>bg / locked</span>
+        <span class="sw"><i style="background:oklch(0.82 0.11 205)"></i>accent / active</span>
+        <span class="sw"><i style="background:oklch(0.80 0.14 155)"></i>complete</span>
+        <span class="sw"><i style="background:oklch(0.70 0.18 25)"></i>failing</span>
+      </div>
+      <p class="type">IBM Plex Sans + IBM Plex Mono</p>
+      <div class="rowlabel"><span>Campaign Map</span><a href="prototype.html?dir=a&view=map">open</a></div>
+      <div class="frame"><iframe src="prototype.html?dir=a&view=map&embed=1" title="Schematic, Campaign Map" tabindex="-1"></iframe><a href="prototype.html?dir=a&view=map" aria-label="Open Schematic Campaign Map"></a></div>
+      <div class="rowlabel"><span>Active Room</span><a href="prototype.html?dir=a&view=room">open</a></div>
+      <div class="frame"><iframe src="prototype.html?dir=a&view=room&embed=1" title="Schematic, Active Room" tabindex="-1"></iframe><a href="prototype.html?dir=a&view=room" aria-label="Open Schematic Active Room"></a></div>
+    </section>
+
+    <section class="dir">
+      <h2>B · editorial</h2>
+      <h3>Ledger</h3>
+      <p class="pitch">An auditor's working papers. Warm ink, serif-led, ruled sheets instead of boxes. Modules are numbered seals on a ruled line. Ochre marks what needs your hand.</p>
+      <div class="tokens">
+        <span class="sw"><i style="background:oklch(0.185 0.008 75)"></i>bg / locked</span>
+        <span class="sw"><i style="background:oklch(0.80 0.12 80)"></i>accent / active</span>
+        <span class="sw"><i style="background:oklch(0.78 0.08 150)"></i>complete</span>
+        <span class="sw"><i style="background:oklch(0.68 0.15 30)"></i>failing</span>
+      </div>
+      <p class="type">Newsreader + JetBrains Mono</p>
+      <div class="rowlabel"><span>Campaign Map</span><a href="prototype.html?dir=b&view=map">open</a></div>
+      <div class="frame"><iframe src="prototype.html?dir=b&view=map&embed=1" title="Ledger, Campaign Map" tabindex="-1"></iframe><a href="prototype.html?dir=b&view=map" aria-label="Open Ledger Campaign Map"></a></div>
+      <div class="rowlabel"><span>Active Room</span><a href="prototype.html?dir=b&view=room">open</a></div>
+      <div class="frame"><iframe src="prototype.html?dir=b&view=room&embed=1" title="Ledger, Active Room" tabindex="-1"></iframe><a href="prototype.html?dir=b&view=room" aria-label="Open Ledger Active Room"></a></div>
+    </section>
+
+    <section class="dir">
+      <h2>C · novel</h2>
+      <h3>Console</h3>
+      <p class="pitch">An operator's board. The chrome has no colour at all; colour appears only as status. The live thing is a solid filled block, never an outline. Modules are tiles with a six-stage meter.</p>
+      <div class="tokens">
+        <span class="sw"><i style="background:oklch(0.12 0 0)"></i>bg / locked</span>
+        <span class="sw"><i style="background:oklch(0.88 0.17 98)"></i>active</span>
+        <span class="sw"><i style="background:oklch(0.83 0.14 165)"></i>complete</span>
+        <span class="sw"><i style="background:oklch(0.70 0.20 22)"></i>failing</span>
+      </div>
+      <p class="type">Bricolage Grotesque + Geist Mono</p>
+      <div class="rowlabel"><span>Campaign Map</span><a href="prototype.html?dir=c&view=map">open</a></div>
+      <div class="frame"><iframe src="prototype.html?dir=c&view=map&embed=1" title="Console, Campaign Map" tabindex="-1"></iframe><a href="prototype.html?dir=c&view=map" aria-label="Open Console Campaign Map"></a></div>
+      <div class="rowlabel"><span>Active Room</span><a href="prototype.html?dir=c&view=room">open</a></div>
+      <div class="frame"><iframe src="prototype.html?dir=c&view=room&embed=1" title="Console, Active Room" tabindex="-1"></iframe><a href="prototype.html?dir=c&view=room" aria-label="Open Console Active Room"></a></div>
+    </section>
+  </main>
+
+  <ul class="notes">
+    <li>Mock data only (<code>mock-data.js</code>), shaped like <code>spec/SCHEMAS.md</code>. Invented identifiers are prefixed MOCK-. The mock puts Module 3 in <code>lab</code> so all three node states show.</li>
+    <li>Inside the full prototype, the strip at the bottom left switches direction and mock stage (incubation, lab, gate) so you can see the action banner change.</li>
+    <li>No XP figure is shown: the repo defines no formula for one. The summary shows counts that exist in the repo.</li>
+    <li>The 42001 badge is absent because no mock card carries that tag. It appears only when a card does.</li>
+  </ul>
+</div>
+<script>
+  // Scale each 1440x900 prototype frame to its cell.
+  const fit = () => document.querySelectorAll(".frame").forEach((f) => {
+    f.querySelector("iframe").style.transform = `scale(${f.clientWidth / 1440})`;
+  });
+  new ResizeObserver(fit).observe(document.body);
+  fit();
+</script>
+</body>
+</html>

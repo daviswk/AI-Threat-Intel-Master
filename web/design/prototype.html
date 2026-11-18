@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=1440">
+<title>Mission Control prototype (mock data)</title>
+<!--
+  PHASE A DESIGN PROTOTYPE. Desktop only, mock data (mock-data.js).
+  Fonts load from a pinned CDN here; the built app bundles them and loads nothing from the network.
+
+  SYSTEM (held across all three directions)
+    Type scale   11 / 12 / 13 / 15 / 18 / 24 / 32 px. Body 13. Reading text 15.
+    Spacing      4 / 8 / 12 / 16 / 24 / 32 / 48 px.
+    Layout       48px top bar. Map: path area + 384px module panel.
+                 Room: left pane 42%, right column split 56 / 44.
+    Status       locked, active, complete, failing. Each is a colour plus a glyph
+                 plus a word, so colour is never the only carrier.
+    Motion       150ms state change, 240ms pane change, one easing. Off under
+                 prefers-reduced-motion.
+  DIRECTIONS (themes.css)
+    A Schematic  IBM Plex Sans + IBM Plex Mono. Slate, one cyan accent, hairlines, square nodes.
+    B Ledger     Newsreader + JetBrains Mono. Warm ink, ochre accent, ruled sheets, round seals.
+    C Console    Bricolage Grotesque + Geist Mono. Achromatic chrome, colour only for status, tile nodes.
+-->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/ibm-plex-sans@5.3.0/400.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/ibm-plex-sans@5.3.0/500.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/ibm-plex-sans@5.3.0/600.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/ibm-plex-mono@5.3.0/400.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/ibm-plex-mono@5.3.0/500.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource-variable/newsreader@5.3.0/opsz.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource-variable/newsreader@5.3.0/opsz-italic.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource-variable/jetbrains-mono@5.3.0/index.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource-variable/bricolage-grotesque@5.3.0/index.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource-variable/geist-mono@5.3.0/index.css">
+<link rel="stylesheet" href="prototype.css">
+<link rel="stylesheet" href="themes.css">
+</head>
+<body data-dir="a">
+<div class="app">
+
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-name">Assurance Engine</span>
+      <span class="brand-sub">Mission Control</span>
+    </div>
+    <nav class="views" aria-label="Views">
+      <button class="view-tab" data-view="map" aria-current="page">Campaign Map</button>
+      <button class="view-tab" data-view="room">Active Room</button>
+      <button class="view-tab" data-view="arsenal">Arsenal &amp; Vault</button>
+    </nav>
+    <div class="topbar-right">
+      <span class="live" title="File watcher connected"><i aria-hidden="true"></i>watching repo</span>
+      <button class="btn" id="syncDown">Sync Down</button>
+      <button class="btn" id="syncUp">Sync Up</button>
+    </div>
+  </header>
+
+  <main>
+    <!-- ============ CAMPAIGN MAP ============ -->
+    <section class="view view-map" id="view-map">
+      <div class="map-main">
+        <div class="map-summary" id="mapSummary"></div>
+        <div class="path" id="path">
+          <svg class="path-lines" id="pathLines" aria-hidden="true"></svg>
+        </div>
+        <div class="legend" aria-label="Status legend">
+          <span class="chip" data-status="complete"><i></i>complete</span>
+          <span class="chip" data-status="active"><i></i>active</span>
+          <span class="chip" data-status="locked"><i></i>locked</span>
+          <span class="chip" data-status="failing"><i></i>failing</span>
+        </div>
+      </div>
+      <aside class="panel module-detail" id="moduleDetail" aria-live="polite"></aside>
+    </section>
+
+    <!-- ============ ACTIVE ROOM ============ -->
+    <section class="view view-room" id="view-room" hidden>
+      <div class="panel pane-left">
+        <div class="banner" id="banner"></div>
+        <div class="tabs" role="tablist" id="leftTabs">
+          <button class="tab" data-tab="stage" aria-selected="true">Stage</button>
+          <button class="tab" data-tab="briefing" aria-selected="false">Briefing</button>
+          <button class="tab" data-tab="papers" aria-selected="false">Papers</button>
+        </div>
+        <div class="paper-strip" id="paperStrip" hidden></div>
+        <article class="reader" id="reader"></article>
+      </div>
+
+      <div class="pane-right">
+        <div class="panel pane-work">
+          <div class="pane-head">
+            <span class="pane-title">Workbench</span>
+            <div class="tabs" role="tablist" id="workTabs">
+              <button class="tab" data-tab="pair" aria-selected="true">Contrastive pair</button>
+              <button class="tab" data-tab="write" aria-selected="false">Write</button>
+              <button class="tab" data-tab="heuristic" aria-selected="false">Add heuristic</button>
+            </div>
+          </div>
+          <div class="work-body" id="workBody"></div>
+        </div>
+
+        <div class="panel pane-run">
+          <div class="pane-head">
+            <span class="pane-title">Harness</span>
+            <code class="run-cmd" id="runCmd"></code>
+            <button class="btn btn-primary" id="runBtn">Verify &amp; Run Harness</button>
+          </div>
+          <div class="run-body">
+            <div class="flags" id="flags"></div>
+            <pre class="term" id="term" aria-live="polite"></pre>
+          </div>
+          <div class="records" id="records"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ ARSENAL & VAULT ============ -->
+    <section class="view view-arsenal" id="view-arsenal" hidden>
+      <div class="panel ars-col">
+        <div class="pane-head">
+          <span class="pane-title">Heuristics codex</span>
+          <input class="input" id="heurSearch" type="search" placeholder="Search HEURISTICS.md" aria-label="Search heuristics">
+        </div>
+        <div class="ars-body" id="heurList"></div>
+      </div>
+      <div class="panel ars-col">
+        <div class="pane-head">
+          <span class="pane-title">Flashcards</span>
+          <div class="seg" id="cardFilter"></div>
+        </div>
+        <div class="ars-body" id="cardView"></div>
+      </div>
+      <div class="panel ars-col">
+        <div class="pane-head">
+          <span class="pane-title">Portfolio vault</span>
+        </div>
+        <div class="ars-body" id="portView"></div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<dialog class="dialog" id="syncDialog">
+  <div class="dialog-head"><span class="pane-title" id="syncTitle"></span><button class="btn btn-quiet" id="syncClose">Close</button></div>
+  <div id="syncFiles"></div>
+  <pre class="term" id="syncTerm"></pre>
+  <div class="dialog-foot" id="syncFoot"></div>
+</dialog>
+
+<div class="toast" id="toast" role="status" hidden></div>
+
+<aside class="tweaks" id="tweaks" aria-label="Prototype controls">
+  <span class="tweaks-title">Prototype · mock data</span>
+  <label>Direction
+    <span class="seg" id="dirSeg">
+      <button data-dir="a">A Schematic</button><button data-dir="b">B Ledger</button><button data-dir="c">C Console</button>
+    </span>
+  </label>
+  <label>Mock stage
+    <span class="seg" id="stageSeg">
+      <button data-stage="incubation">incubation</button><button data-stage="lab">lab</button><button data-stage="gate">gate</button>
+    </span>
+  </label>
+</aside>
+
+<script src="mock-data.js"></script>
+<script src="prototype.js"></script>
+</body>
+</html>

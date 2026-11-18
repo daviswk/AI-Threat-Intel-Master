@@ -70,6 +70,9 @@ application_default_credentials.json
 web/node_modules/
 web/dist/
 
+# ---- Explainer video: a rendered file, kept local ---------------------------
+explainer/*.mp4
+
 # ---- OS / editor noise ------------------------------------------------------
 .DS_Store
 Thumbs.db
